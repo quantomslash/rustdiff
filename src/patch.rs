@@ -1,7 +1,7 @@
 use crate::delta::Delta;
 use crate::error::DiffError;
 use crate::sign::Signature;
-use log::{error, trace};
+use log::error;
 use serde_json;
 use std::collections::HashMap;
 use std::fs::File;
@@ -21,11 +21,9 @@ pub fn patch_file_with_delta(
     for delta in loaded_delta {
         match delta {
             Delta::B(b) => {
-                trace!("Byte is {:?}", b as char);
                 output.push(b);
             }
             Delta::I(i) => {
-                trace!("Index is {:?}", i);
                 if let Some(mut data) = get_data(i, &signatures) {
                     output.append(&mut data);
                 } else {
