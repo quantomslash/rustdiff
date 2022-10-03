@@ -54,6 +54,8 @@ My first strategy involved generating delta with the same chunk size blocks as t
 
 However, I modified it to scan the file byte by byte and if the data doesn't match, the bytes are added to the delta, instead of the whole blocks. This improved the efficiency and reduced the delta file sizes as byte by byte comparison was done.
 
+This is slightly different to one of your requirements. However, if you'd still like to see the other strategy, I'd be happy to add it in.
+
 ## Why JSON?
 
 **Just for readability!**
