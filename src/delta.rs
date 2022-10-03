@@ -64,9 +64,9 @@ pub fn gen_delta_from_file(
     };
 
     let mut index = 0;
-    while index < buffer.len() {
-        let chunk = &buffer[index..];
+    while index < buffer.len() {        
         if index > buffer.len() - chunk_size {
+            let chunk = &buffer[index..];
             // Last iterable index
             for byte in chunk {
                 delta.push(Delta::B(*byte))
@@ -74,12 +74,13 @@ pub fn gen_delta_from_file(
             break;
         }
 
-        let curr_hash = hashes[index].weak_hash;
+        let curr_hash = &hashes[index].weak_hash;
+        let curr_bytes = hashes[index].bytes.clone();
         if signatures.contains_key(&curr_hash) {
             // Key match!
             if let Some(sign) = &signatures.get(&curr_hash) {
                 let checksum = &sign.checksum;
-                let this_checksum = get_blake2(chunk.to_vec())?;
+                let this_checksum = get_blake2(curr_bytes)?;
                 if checksum == &this_checksum {
                     delta.push(Delta::I(sign.index));
                     index = index + chunk_size;
@@ -98,7 +99,7 @@ pub fn gen_delta_from_file(
     // Write to the output file
     let f = File::create(output_path)?;
     serde_json::to_writer(&f, &delta)?;
-    // serde_cbor::to_writer(&f, &delta)?;
+
     Ok(delta)
 }
 

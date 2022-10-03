@@ -9,7 +9,7 @@ use std::error::Error;
 
 const DEFAULT_SIGN_FILE: &str = "data/output/signs.json";
 const DEFAULT_DELTA_FILE: &str = "data/output/delta.json";
-const DEFAULT_PATCH_FILE: &str = "data/output/patch.json";
+const DEFAULT_PATCH_FILE: &str = "data/output/patched.txt";
 const DEFAULT_CHUNK_SIZE: u8 = 4;
 #[derive(Parser)]
 struct Cli {

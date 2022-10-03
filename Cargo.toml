@@ -12,6 +12,5 @@ blake2 = "*"
 thiserror = "*"
 simple_logger = "*"
 serde_json = "*"
-serde_cbor = "*"
 serde = { version = "*", features = ["derive"] }
 clap = { version = "*", features = ["derive"] }
