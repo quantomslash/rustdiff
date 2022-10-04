@@ -50,7 +50,7 @@ There are two main algorithms that can be used to calculate hashes:
 
 ## Chunking Strategy
 
-My first strategy involved generating delta with the same chunk size blocks as the signature file. These blocks were then matched with the signature blocks and matching indexes were added to the delta.
+My first strategy involved generating delta with the same chunk size blocks as the signature file. These blocks were then matched with the signature blocks and ~~matching indexes~~ differing blocks were added to the delta.
 
 However, I modified it to scan the file byte by byte and if the data doesn't match, the bytes are added to the delta, instead of the whole blocks. This improved the efficiency and reduced the delta file sizes as byte by byte comparison was done.
 
